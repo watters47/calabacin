@@ -1,5 +1,14 @@
 #!/usr/bin/env ruby
 
+=begin
+logs
+push changes (via githook?)
+detect changes
+crontab
+argv parser
+=end
+
+
 def run(command)
   puts command
   output = `#{command}`
@@ -46,10 +55,11 @@ def init()
 Initializes a new Git repo and a branch to store and version the package list
 =end
   run("git init -q #{DATABASE_DIR}")
-  run("touch #{DATABASE_PATH}")
-  git("add #{DATABASE_FILENAME}")
+#  run("touch #{DATABASE_PATH}")
+#  git("add #{DATABASE_FILENAME}")
   commit_description = 'Adds an empty list to initialize the repo'
-  git("commit -m \"#{commit_description}\" #{DATABASE_FILENAME}")
+#  git("commit -m \"#{commit_description}\" #{DATABASE_FILENAME}")
+  git("commit -am \"#{commit_description}\"")
   git("remote add upstream #{UPSTREAM_REMOTE}")
   git("checkout -b #{BRANCH_NAME}")
 =begin
@@ -77,15 +87,7 @@ def push()
 #FIXME it asks for ssh key!
 end
 
-=begin
-logs
-push changes (via githook?)
-detect changes
-crontab
-argv parser
-=end
-
 # install()
-# init() 
+init() 
 # update()
 # push()
